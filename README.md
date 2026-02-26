@@ -40,7 +40,7 @@
 - **Database (Meta)**: MongoDB Atlas (Assignments & User Data).
 - **Database (Sandbox)**: PostgreSQL (Neon Cloud).
 - **Security**: Bcrypt.js (Hashing), JWT (Auth Middleware).
-- **LLM**: Google Gemini 1.5 Flash.
+- **LLM**: Google Gemini 2.5 Flash.
 
 ---
 
