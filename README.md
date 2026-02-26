@@ -4,6 +4,13 @@
 
 ---
 
+## 🔗 Live Links
+- **Production URL**: [https://sql-practice-studio.vercel.app/](https://sql-practice-studio.vercel.app/)
+- **Backend API**: [https://sql-practice-studio.onrender.com](https://sql-practice-studio.onrender.com)
+- **GitHub Repo**: [https://github.com/Sanket-Pandit-Patil/sql-practice-studio](https://github.com/Sanket-Pandit-Patil/sql-practice-studio)
+
+---
+
 ## ✨ Key Features
 
 ### 🔐 Secure Authentication & Access Control
@@ -72,6 +79,7 @@ sql-practice-studio/
    PG_DATABASE=your_db_name
    JWT_SECRET=your_super_secret_key
    GEMINI_API_KEY=your_gemini_key
+   CORS_ORIGIN=https://sql-practice-studio.vercel.app
    ```
 4. Start server: `npm run dev`.
 
@@ -80,7 +88,7 @@ sql-practice-studio/
 2. Install dependencies: `npm install`.
 3. Configure `.env`:
    ```env
-   VITE_API_BASE_URL=http://localhost:5000/api
+   VITE_API_BASE_URL=https://sql-practice-studio.onrender.com/api
    ```
 4. Start dev server: `npm run dev`.
 
@@ -95,8 +103,9 @@ The platform implements a **Strict Read-Only Enforcement**:
 
 ---
 
-## 📊 Data & Migration
-- **GitHub**: [github.com/Sanket-Pandit-Patil/sql-practice-studio](https://github.com/Sanket-Pandit-Patil/sql-practice-studio)
-- **Database**: PostgreSQL (Cloud) + MongoDB Atlas.
+## 📊 Status & Data
+- **Hosting**: Vercel (Frontend) + Render (Backend).
+- **Bugs**: No known critical regressions.
+- **License**: MIT.
 
 Created with ❤️ by **Sanket Patil**
