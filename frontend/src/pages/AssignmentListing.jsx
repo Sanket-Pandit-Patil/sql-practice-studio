@@ -29,10 +29,10 @@ const AssignmentListing = () => {
 
     return (
         <div className="assignment-listing app-container">
-            <header>
-                <h1>CipherSQLStudio</h1>
-                <p>Master SQL with real-time feedback and intelligent hints.</p>
-            </header>
+            <section className="listing-header">
+                <h2>Explore Assignments</h2>
+                <p>Select a challenge to start practicing your SQL skills.</p>
+            </section>
 
             <div className="assignment-grid">
                 {assignments.map((assignment) => (

@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Editor from '@monaco-editor/react';
-import { getAssignmentById, executeQuery, getHint } from '../services/api';
+import { getAssignmentById, executeQuery, getHint, saveAttempt, getAttempts } from '../services/api';
+import { useAuth } from '../context/AuthContext';
 import SchemaDataViewer from '../components/SchemaDataViewer';
 import ExecutionResults from '../components/ExecutionResults';
 import '../styles/pages/assignment-workspace.scss';
@@ -9,11 +10,26 @@ import '../styles/pages/assignment-workspace.scss';
 const AssignmentWorkspace = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+    const { user } = useAuth();
+
     const [data, setData] = useState(null);
     const [sql, setSql] = useState('-- Write your SQL query here\nSELECT * FROM ');
     const [execution, setExecution] = useState({ loading: false, results: null, error: null });
     const [hint, setHint] = useState({ loading: false, text: '', error: null });
+    const [history, setHistory] = useState({ loading: false, items: [] });
     const [loading, setLoading] = useState(true);
+
+    const fetchHistory = useCallback(async () => {
+        if (!user) return;
+        setHistory(prev => ({ ...prev, loading: true }));
+        try {
+            const items = await getAttempts(id);
+            setHistory({ loading: false, items });
+        } catch (err) {
+            console.error('Failed to fetch history:', err);
+            setHistory(prev => ({ ...prev, loading: false }));
+        }
+    }, [id, user]);
 
     useEffect(() => {
         const fetchWorkspaceData = async () => {
@@ -31,20 +47,36 @@ const AssignmentWorkspace = () => {
             }
         };
         fetchWorkspaceData();
-    }, [id]);
+        fetchHistory();
+    }, [id, fetchHistory]);
 
     const handleExecute = async () => {
         setExecution({ loading: true, results: null, error: null });
         setHint({ ...hint, text: '' }); // Clear hint when executing new query
+
+        let executionError = null;
+        let results = null;
+
         try {
-            const res = await executeQuery(sql, id);
-            setExecution({ loading: false, results: res, error: null });
+            results = await executeQuery(sql, id);
+            setExecution({ loading: false, results, error: null });
         } catch (err) {
+            executionError = err.response?.data?.error?.message || 'Execution failed';
             setExecution({
                 loading: false,
                 results: null,
-                error: err.response?.data?.error?.message || 'Execution failed'
+                error: executionError
             });
+        }
+
+        // Save attempt if user is logged in
+        if (user) {
+            try {
+                await saveAttempt(id, sql, !executionError, executionError);
+                fetchHistory(); // Refresh history list
+            } catch (err) {
+                console.error('Failed to save attempt:', err);
+            }
         }
     };
 
@@ -92,6 +124,27 @@ const AssignmentWorkspace = () => {
                         <h3>Schema & Sample Data</h3>
                         <SchemaDataViewer tables={data.tables} />
                     </section>
+
+                    {user && (
+                        <section className="history-section">
+                            <h3>Query History</h3>
+                            <div className="history-list">
+                                {history.loading && history.items.length === 0 ? (
+                                    <p className="muted">Loading history...</p>
+                                ) : history.items.length === 0 ? (
+                                    <p className="muted">No attempts yet.</p>
+                                ) : (
+                                    history.items.slice(0, 5).map((item, idx) => (
+                                        <div key={idx} className="history-item" onClick={() => setSql(item.query)}>
+                                            <span className={`status-dot ${item.isCorrect ? 'status-dot--success' : 'status-dot--error'}`}></span>
+                                            <code className="history-query">{item.query.substring(0, 40)}...</code>
+                                            <span className="history-date">{new Date(item.timestamp).toLocaleTimeString()}</span>
+                                        </div>
+                                    ))
+                                )}
+                            </div>
+                        </section>
+                    )}
                 </div>
 
                 {/* Right Panel: Editor and Results */}

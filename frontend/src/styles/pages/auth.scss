@@ -1,0 +1,196 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.auth-container {
+    height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 0% 0%, rgba($primary-color, 0.1), transparent 50%),
+        radial-gradient(circle at 100% 100%, rgba($primary-color, 0.05), transparent 50%),
+        #0d1117;
+    padding: 2rem;
+}
+
+.auth-card {
+    background: rgba($bg-panel, 0.45);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 2.5rem 2.25rem; // Reduced from 3.5rem 3rem
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    width: 100%;
+    max-width: 400px; // Reduced from 480px
+    box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.7);
+    animation: authEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba($primary-color, 0.4), transparent);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 0.25rem;
+        color: white;
+        font-weight: 800;
+        font-size: 1.85rem; // Slightly smaller typography
+        letter-spacing: -0.05rem;
+    }
+
+    p {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.9rem; // Slightly smaller
+        margin-bottom: 2rem; // Reduced from 3rem
+    }
+}
+
+.auth-badge {
+    position: absolute;
+    top: 1.5rem;
+    right: 3rem;
+    left: 3rem;
+    text-align: center;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.2rem;
+    color: $primary-color;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+@keyframes authEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.auth-error,
+.auth-success {
+    padding: 1rem 1.25rem;
+    border-radius: 14px;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border: 1px solid;
+}
+
+.auth-error {
+    background: rgba($danger-color, 0.1);
+    color: lighten($danger-color, 5%);
+    border-color: rgba($danger-color, 0.2);
+
+    &::before {
+        content: '⚠️';
+    }
+}
+
+.auth-success {
+    background: rgba($success-color, 0.1);
+    color: lighten($success-color, 10%);
+    border-color: rgba($success-color, 0.2);
+    animation: pulseSuccess 2s infinite;
+
+    &::before {
+        content: '✅';
+    }
+}
+
+@keyframes pulseSuccess {
+    0% {
+        background: rgba($success-color, 0.1);
+    }
+
+    50% {
+        background: rgba($success-color, 0.15);
+    }
+
+    100% {
+        background: rgba($success-color, 0.1);
+    }
+}
+
+.form-group {
+    margin-bottom: 1.25rem; // Reduced from 1.75rem
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.4);
+        text-transform: uppercase;
+        letter-spacing: 0.08rem;
+    }
+
+    input {
+        width: 100%;
+        padding: 0.85rem 1.15rem; // Reduced padding
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        color: white;
+        font-size: 0.95rem;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        &:focus {
+            outline: none;
+            border-color: $primary-color;
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 0 4px rgba($primary-color, 0.15);
+        }
+
+        &::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+    }
+}
+
+.auth-btn {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.9rem; // Reduced padding
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.02rem;
+}
+
+.auth-footer {
+    margin-top: 1.75rem; // Reduced from 2.5rem
+    font-size: 0.9rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.4);
+
+    a {
+        color: white;
+        font-weight: 700;
+        margin-left: 0.35rem;
+        text-decoration: underline;
+        text-decoration-color: rgba($primary-color, 0.5);
+        text-underline-offset: 4px;
+        transition: all 0.2s;
+
+        &:hover {
+            color: $primary-color;
+            text-decoration-color: $primary-color;
+        }
+    }
+}

@@ -1,0 +1,61 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.main-navbar {
+    background: rgba($bg-panel, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba($border-color, 0.5);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.02rem;
+    text-decoration: none;
+
+    span {
+        color: $primary-color;
+    }
+
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+.navbar-actions {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+
+    .welcome-text {
+        font-size: 0.9rem;
+        color: $text-muted;
+        font-weight: 500;
+    }
+}
