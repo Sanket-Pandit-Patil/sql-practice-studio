@@ -1,0 +1,38 @@
+@use 'variables' as *;
+
+@mixin mobile {
+    @media (min-width: #{$breakpoint-mobile}) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (min-width: #{$breakpoint-tablet}) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: #{$breakpoint-desktop}) {
+        @content;
+    }
+}
+
+@mixin large {
+    @media (min-width: #{$breakpoint-large}) {
+        @content;
+    }
+}
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin card-style {
+    background: $bg-panel;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    padding: 1rem;
+}

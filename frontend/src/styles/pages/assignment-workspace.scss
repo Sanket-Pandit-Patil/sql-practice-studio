@@ -1,0 +1,129 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.assignment-workspace {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.workspace-nav {
+    height: 60px;
+    background: $bg-panel;
+    border-bottom: 1px solid $border-color;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    gap: 2rem;
+
+    &__title {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        h2 {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+    }
+}
+
+.workspace-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    flex-direction: column; // Mobile first
+
+    @include tablet {
+        flex-direction: row;
+    }
+}
+
+.workspace-panel {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+
+    &--info {
+        flex: 1;
+        background: #0d1117;
+        padding: 1.5rem;
+        border-right: 1px solid $border-color;
+        max-width: 100%;
+
+        @include tablet {
+            max-width: 450px;
+        }
+
+        h3 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: $text-muted;
+            letter-spacing: 0.05rem;
+            margin-top: 1.5rem;
+
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+    }
+
+    &--editor {
+        flex: 2;
+        background: $bg-dark;
+    }
+}
+
+.question-text {
+    font-size: 1.1rem;
+    white-space: pre-wrap;
+    background: rgba($primary-color, 0.05);
+    padding: 1rem;
+    border-left: 4px solid $primary-color;
+    border-radius: 4px;
+}
+
+.panel-header {
+    background: $bg-panel;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid $border-color;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.monaco-wrapper {
+    background: #1e1e1e;
+    border-bottom: 1px solid $border-color;
+}
+
+.results-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #0d1117;
+}
+
+.hint-box {
+    padding: 0.75rem 1rem;
+    margin: 1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+
+    &--success {
+        background: rgba($warning-color, 0.1);
+        border: 1px solid rgba($warning-color, 0.3);
+        color: #ebca77;
+    }
+
+    &--error {
+        background: rgba($danger-color, 0.1);
+        border: 1px solid rgba($danger-color, 0.3);
+        color: #f87171;
+    }
+}

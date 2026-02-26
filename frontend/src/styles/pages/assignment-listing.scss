@@ -1,0 +1,78 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.assignment-listing {
+    padding-top: 3rem;
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 3rem;
+
+        p {
+            color: $text-muted;
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+        }
+    }
+}
+
+.assignment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.assignment-card {
+    @include card-style;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+        transform: translateY(-4px);
+        border-color: $primary-color;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    &__header {
+        margin-bottom: 1rem;
+
+        h3 {
+            margin-top: 0.5rem;
+            margin-bottom: 0;
+        }
+    }
+
+    &__description {
+        color: $text-muted;
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+        flex-grow: 1;
+    }
+}
+
+.difficulty-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+
+    &--basic {
+        background: rgba($success-color, 0.2);
+        color: $success-color;
+    }
+
+    &--intermediate {
+        background: rgba($warning-color, 0.2);
+        color: $warning-color;
+    }
+
+    &--advanced {
+        background: rgba($danger-color, 0.2);
+        color: $danger-color;
+    }
+}
