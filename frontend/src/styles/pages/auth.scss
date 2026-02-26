@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
@@ -94,7 +95,7 @@
 
 .auth-error {
     background: rgba($danger-color, 0.1);
-    color: lighten($danger-color, 5%);
+    color: color.adjust($danger-color, $lightness: 5%);
     border-color: rgba($danger-color, 0.2);
 
     &::before {
@@ -104,7 +105,7 @@
 
 .auth-success {
     background: rgba($success-color, 0.1);
-    color: lighten($success-color, 10%);
+    color: color.adjust($success-color, $lightness: 10%);
     border-color: rgba($success-color, 0.2);
     animation: pulseSuccess 2s infinite;
 

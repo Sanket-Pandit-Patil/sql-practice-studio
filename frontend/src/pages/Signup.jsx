@@ -71,7 +71,7 @@ const Signup = () => {
                 </form>
 
                 <p className="auth-footer">
-                    Part of the studio? <Link to="/login">Sign In</Link>
+                    Part of the studio? <Link to="/login">Login</Link>
                 </p>
             </div>
         </div>

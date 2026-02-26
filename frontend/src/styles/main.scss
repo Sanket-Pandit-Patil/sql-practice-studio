@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'abstracts/variables' as *;
 @use 'abstracts/mixins' as *;
 @use 'base/base';
@@ -23,7 +24,7 @@
         transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
         &:hover {
-            background: lighten($primary-color, 5%);
+            background: color.adjust($primary-color, $lightness: 5%);
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba($primary-color, 0.3);
         }
@@ -44,7 +45,7 @@
     }
 
     &--success {
-        background: linear-gradient(135deg, $success-color, darken($success-color, 15%));
+        background: linear-gradient(135deg, $success-color, color.adjust($success-color, $lightness: -15%));
         color: white;
         border: 1px solid rgba(255, 255, 255, 0.1);
         padding: 0.6rem 1.4rem;
@@ -52,7 +53,7 @@
         box-shadow: 0 4px 15px rgba($success-color, 0.2);
 
         &:hover:not(:disabled) {
-            background: linear-gradient(135deg, lighten($success-color, 5%), $success-color);
+            background: linear-gradient(135deg, color.adjust($success-color, $lightness: 5%), $success-color);
             transform: translateY(-1px);
             box-shadow: 0 6px 20px rgba($success-color, 0.3);
         }

@@ -44,8 +44,31 @@
 
 .auth-buttons {
     display: flex;
-    gap: 1rem;
-    align-items: center;
+    gap: 0.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 4px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+
+    .nav-auth-btn {
+        padding: 0.6rem 1.25rem;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.5);
+        text-decoration: none;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        &:hover {
+            color: white;
+        }
+
+        &.active {
+            background: $primary-color;
+            color: white;
+            box-shadow: 0 4px 12px rgba($primary-color, 0.3);
+        }
+    }
 }
 
 .user-profile {
